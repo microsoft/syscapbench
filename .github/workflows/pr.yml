@@ -47,7 +47,7 @@ jobs:
           ruff -V
 
       # Check spelling
-      - name: Install ruff/misspell
+      - name: Check spelling
         run: |
           set -Eeuox pipefail
     
