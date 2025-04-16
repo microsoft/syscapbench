@@ -51,7 +51,7 @@ jobs:
         run: |
           set -Eeuox pipefail
     
-          $HOME/.local/bin/misspell misspell -error
+          $HOME/.local/bin/misspell -error *
 
       # Check formatting
       - name: Check formatting
