@@ -45,7 +45,7 @@ api_key = config.get('llm', {}).get('api_key', '')
 logger.info('Configuration values:')
 logger.info(f'API Type: {api_type}')
 logger.info(f'Base URL: {base_url}')
-logger.info(f'API Key: {api_key}')
+logger.info(f'API Key: [REDACTED]')
 
 os.environ['AZURE_API_BASE'] = base_url
 os.environ['AZURE_OPENAI_API_KEY'] = api_key
