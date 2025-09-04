@@ -39,6 +39,7 @@ VanSys is a comprehensive benchmarking framework designed to evaluate the perfor
    cd cli
    ./install.sh
    ```
+3. Each benchmark includes an `env.toml` file for configuration. You should add your own llm endpoint url and key there.
 
 ### Running Benchmarks
 
@@ -48,6 +49,14 @@ VanSys is a comprehensive benchmarking framework designed to evaluate the perfor
 cd cli
 ./run.sh
 ```
+## Output Format
+
+Benchmarks generate standardized outputs:
+
+- `result.jsonl`: Detailed evaluation results
+- `summary.json`: Aggregated performance metrics
+- Test-specific breakdowns and comparisons
+
 
 ## Available Benchmarks
 
@@ -100,22 +109,6 @@ The project uses Ruff for code formatting and linting:
 - Target Python version: 3.9+
 - Google-style docstrings
 - Comprehensive linting rules for code quality
-
-## Configuration
-
-Each benchmark includes an `env.toml` file for configuration:
-
-- LLM API endpoints and keys
-- Evaluation parameters
-- Output settings
-
-## Output Format
-
-Benchmarks generate standardized outputs:
-
-- `result.jsonl`: Detailed evaluation results
-- `summary.json`: Aggregated performance metrics
-- Test-specific breakdowns and comparisons
 
 
 ## Contributing
