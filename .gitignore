@@ -170,5 +170,26 @@ cython_debug/
 # Ruff stuff:
 .ruff_cache/
 
+benchmarks/*/outputs/
+benchmarks/*/logs/
+cli/logs/
+cli/outputs/
+
 # PyPI configuration file
 .pypirc
+
+# Cursor  
+#  Cursor is an AI-powered code editor.`.cursorignore` specifies files/directories to 
+#  exclude from AI features like autocomplete and code analysis. Recommended for sensitive data
+#  refer to https://docs.cursor.com/context/ignore-files
+.cursorignore
+.cursorindexingignore
+
+.DS_store
+
+benchmarks/course_project_bench/src/code_raw/*
+# benchmarks/cache_bench/data/benchmark/trace/*
+benchmarks/cache_bench/src/cache_simulator/cache/trace/zipf/*
+benchmarks/cache_bench/src/cache_simulator/cache/trace_20_llm_ali_tencent_20250403/*
+benchmarks/cache_bench/src/cache_simulator/analysis/*
+cli/repo_archive.tar

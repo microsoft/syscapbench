@@ -1,14 +1,122 @@
-# Project
+# VanSys: Benchmarking AI for System Engineering
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+VanSys is a comprehensive benchmarking framework designed to evaluate the performance of Large Language Models (LLMs) and AI systems on various system engineering tasks. The project includes multiple specialized benchmarks for caching systems, course examinations, project assignments, and provides both CLI tools and SDK for easy integration.
 
-As the maintainer of this project, please make a few updates:
+## Project Structure
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
+### Benchmarks
+
+- **Cache Benchmark** (`benchmarks/cache_bench/`) - Evaluates AI performance on cache system optimization and simulation tasks
+- **Course Exam Benchmark** (`benchmarks/course_exam_bench/`) - Tests LLM understanding of system engineering concepts through MIT course exams (54 questions across 4 exams)
+- **Course Project Benchmark** (`benchmarks/course_project_bench/`) - Assesses AI capability on practical system engineering lab projects
+- **Example Benchmark** (`benchmarks/example_bench/`) - Template and reference implementation for creating new benchmarks
+
+### Core Components
+
+- **CLI Tools** (`cli/`) - Command-line interface for running benchmarks and managing evaluations
+- **SDK** (`sdk/`) - Software development kit providing evaluators, LLM interfaces, and utility functions
+- **Docker Support** - Each benchmark includes Dockerfiles for containerized execution
+
+## Quick Start
+
+### Prerequisites
+
+- Python 3.9+
+- Docker (optional, for containerized execution)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-repo/vansys.git
+   cd vansys
+   ```
+
+2. Install dependencies for a specific benchmark:
+
+   ```bash
+   cd cli
+   ./install.sh
+   ```
+
+### Running Benchmarks
+
+#### Using CLI
+
+```bash
+cd cli
+./run.sh
+```
+
+## Available Benchmarks
+
+### Course Exam Benchmark
+
+Evaluates LLM performance on system engineering course materials from MIT, including:
+
+- 6.5840 Distributed System Engineering (Spring 2024/2025)
+- 6.1810 Operating System Engineering (Fall 2024)
+- Coverage: 54 questions across operating systems and distributed systems
+- Question types: Single-choice, multiple-choice, and short-answer
+
+**Sample Results:**
+
+| Model | Score Range | Student Average |
+|-------|-------------|-----------------|
+| GPT-4 | 24-54/95 | 77/95 |
+| GPT-4o | 24-55/95 | 77/95 |
+| O3-mini | 25-52/95 | 77/95 |
+
+### Cache Benchmark
+
+Tests AI systems on cache optimization tasks including:
+
+- Cache policy implementation and evaluation
+- Trace-based simulation analysis  
+- Performance optimization strategies
+- Support for multiple cache algorithms (LRU, LFU, FIFO, etc.)
+
+### Course Project Benchmark
+
+Assesses practical system engineering skills through lab exercises and project implementations.
+
+## Development
+
+### Creating New Benchmarks
+
+Use the `example_bench` as a template:
+
+1. Copy the example benchmark structure
+2. Implement your specific evaluation logic in `src/main.py`
+3. Update the README with benchmark-specific details
+4. Add test cases in the `tests/` directory
+
+### Code Quality
+
+The project uses Ruff for code formatting and linting:
+
+- Line length: 120 characters
+- Target Python version: 3.9+
+- Google-style docstrings
+- Comprehensive linting rules for code quality
+
+## Configuration
+
+Each benchmark includes an `env.toml` file for configuration:
+
+- LLM API endpoints and keys
+- Evaluation parameters
+- Output settings
+
+## Output Format
+
+Benchmarks generate standardized outputs:
+
+- `result.jsonl`: Detailed evaluation results
+- `summary.json`: Aggregated performance metrics
+- Test-specific breakdowns and comparisons
+
 
 ## Contributing
 

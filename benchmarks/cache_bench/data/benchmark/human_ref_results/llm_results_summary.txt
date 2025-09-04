@@ -1,0 +1,6 @@
+== 533 ==
+533 | alibaba-storage -> avg mr_test: 0.7696
+533 | ra-fwe -> avg mr_test: 0.7089
+533 | ra-multikey -> avg mr_test: 0.6130
+533 | tencent-storage -> avg mr_test: 0.7666
+
