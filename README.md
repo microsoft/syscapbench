@@ -49,7 +49,7 @@ VanSys is a comprehensive benchmarking framework designed to evaluate the perfor
 cd cli
 ./run.sh
 ```
-## Output Format
+#### Output Format
 
 Benchmarks generate standardized outputs:
 
