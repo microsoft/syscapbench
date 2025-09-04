@@ -1,0 +1,1 @@
+{"task_id": "example_1", "task_name": "problems/test-repo-problems/1.md", "repo_name": "projects/test-repo", "task": "XXX", "test_method": "pip install -e . && pytest tests/test_tribonaccy.py", "test_results": "XXX", "difficulty": "moderate/hard", "link": "http://nil.csail.mit.edu/6.5840/2024/labs/lab-mr.html"}

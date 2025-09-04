@@ -1,0 +1,4 @@
+openai==1.79.0
+pyspark==3.5.5
+loguru==0.7.3
+pandas==2.2.3
