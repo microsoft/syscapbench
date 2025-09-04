@@ -40,7 +40,7 @@ api_key = config.get('llm', {}).get('api_key', '')
 print('Configuration values:')
 print(f'API Type: {api_type}')
 print(f'Base URL: {base_url}')
-print(f'API Key: {api_key}')
+print('API Key: [REDACTED]')
 
 os.environ['OPENAI_API_TYPE'] = api_type
 os.environ['OPENAI_BASE_URL'] = base_url

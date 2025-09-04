@@ -14,7 +14,7 @@ OPENAI_API_VERSION = os.getenv('OPENAI_API_VERSION', '2024-05-01-preview')
 
 print(f'Using OpenAI API type: {OPENAI_API_TYPE}')
 print(f'Using OpenAI base URL: {OPENAI_BASE_URL}')
-print(f'Using OpenAI API key: {OPENAI_API_KEY}')
+print(f'Using OpenAI API key: [REDACTED]')
 
 
 class LLM:
