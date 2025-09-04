@@ -11,7 +11,7 @@ def eval_libcachesim(trace_path=None, cache_alg='tinyLFU):
         raise FileNotFoundError(f"Trace file not found: {trace_path}")
 
     mr = run_libcachesim(
-        cache_trace=trace_path),
+        cache_trace=trace_path,
         cache_alg=cache_alg,
         cache_cap=9,
         params='main-cache=clock,window-size=0.1',  # if you want to use default parameters, simply set params as "" (an empty string)
