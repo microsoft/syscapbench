@@ -2,7 +2,7 @@
 
 set -e  # Exit immediately on error.
 
-echo "==> Setting up VanSys-CLI environment..."
+echo "==> Setting up SysCap-CLI environment..."
 
 python3.12 -m venv .venv
 source .venv/bin/activate
