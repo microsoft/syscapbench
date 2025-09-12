@@ -9,4 +9,4 @@ source .venv/bin/activate
 pip install -r requirements.txt
 deactivate
 
-echo "==> VanSys-CLI environment is set up successfully."
+echo "==> SysCap-CLI environment is set up successfully."
