@@ -1,6 +1,6 @@
-# VanSys: Benchmarking AI for System Engineering
+# SysCapBench: A Benchmark Suite for Evaluating the System Capabilities of AI Models
 
-VanSys is a comprehensive benchmarking framework designed to evaluate the performance of Large Language Models (LLMs) and AI systems on various system engineering tasks. The project includes multiple specialized benchmarks for caching systems, course examinations, project assignments, and provides both CLI tools and SDK for easy integration.
+SysCapBench is a comprehensive benchmarking framework for evaluating the performance of Large Language Models (LLMs) and AI systems across critical system-related tasks. It features specialized benchmarks for system course exams, course projects, and algorithm design, and offers both CLI tools and an SDK for seamless integration.
 
 ## Project Structure
 
@@ -29,8 +29,8 @@ VanSys is a comprehensive benchmarking framework designed to evaluate the perfor
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-repo/vansys.git
-   cd vansys
+   git clone https://github.com/your-repo/syscapbench.git
+   cd syscapbench
    ```
 
 2. Install dependencies for a specific benchmark:
