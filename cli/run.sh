@@ -34,4 +34,4 @@ python local_run.py --benchmark_name "cache_bench"
 
 deactivate
 
-echo "==> VanSys-CLI run completed successfully."
+echo "==> SysCap-CLI run completed successfully."
