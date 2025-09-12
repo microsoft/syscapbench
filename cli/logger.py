@@ -1,4 +1,4 @@
-"""Logger configuration for the VanSys CLI application."""
+"""Logger configuration for the SysCap-CLI application."""
 
 import logging
 import os
