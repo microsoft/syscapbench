@@ -3,7 +3,7 @@
 set -e  # Exit immediately on error.
 
 source .venv/bin/activate
-echo "==> Start to run VanSys CLI"
+echo "==> Start to run SysCap CLI"
 
 # check if .venv exists, if yes, remove it
 if [ -d "../benchmarks/course_project_bench/.venv" ]; then
