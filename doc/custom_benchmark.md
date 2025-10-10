@@ -33,11 +33,11 @@ Choose a benchmark that is similar to your setting as a starting point. For exam
    ```
    your_bench_name/
    ├── src/
-   │   └── main.py          # Main evaluation logic
-   ├── data/                # Test data and scenarios
-   │   └── benchmark/       # Benchmark datasets
-   ├── tests/               # Unit tests
-   ├── Dockerfile           # Docker configuration
+   │   └── main.py         # Main evaluation logic
+   ├── data/               # Test data and scenarios
+   │   └── benchmark/      # Benchmark datasets
+   ├── tests/              # Unit tests
+   ├── Dockerfile          # Docker configuration (optional)
    ├── env.toml            # Environment configuration
    ├── install.sh          # Installation script
    ├── run.sh              # Execution script
@@ -109,11 +109,11 @@ from datetime import datetime
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
 
-from sdk.utils import set_llm_endpoint_from_config  # noqa: E402
+from sdk.utils import set_llm_endpoint_from_config  
 set_llm_endpoint_from_config('env.toml')
 
-from sdk.executor import SimpleExecutor  # noqa: E402
-from sdk.evaluator import BasicEvaluator  # noqa: E402
+from sdk.executor import SimpleExecutor  
+from sdk.evaluator import BasicEvaluator  
 
 
 def main(_input_file, output_dir, _model_name, agent_name):
@@ -186,7 +186,7 @@ def main(_input_file, output_dir, _model_name, agent_name):
         'cosine_similarity': avg_score[3],
         'embeddings_similarity': avg_score[4],
         'llmjudger_rating': avg_score[5],
-        'final_score': sum(avg_score[:5]) / 5,  # Average of first five metrics
+        'final_score': sum(avg_score[:5]) / 5,  # It's final score for your benchmark, you should customize it
     }
     with open(os.path.join(output_dir, 'avg_score.json'), 'w', encoding='utf-8') as avg_score_file:
         json.dump(avg_score_dict, avg_score_file, indent=4)
@@ -291,6 +291,8 @@ set -e
 
 echo "Installing dependencies for your_bench_name..."
 
+# You can add system-level dependencies here if needed
+
 # Create virtual environment if needed
 if [ ! -d "venv" ]; then
     python3 -m venv venv
@@ -393,7 +395,7 @@ Run tests:
 
 To make your benchmark available through the SysCapBench CLI:
 
-1. Update `cli/run_docker.sh` similarly
+1. Update `cli/run_docker.sh` or /run_all_local.sh if needed
 
 2. Your benchmark will now be accessible via:
 

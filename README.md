@@ -1,21 +1,19 @@
 # SysCapBench: A Benchmark Suite for Evaluating LLM's System Capabilities
 
-SysCapBench is a comprehensive benchmarking framework for evaluating the performance of Large Language Models (LLMs) and AI systems across critical system capabilities. It features specialized benchmarks for system course exams, course projects, and algorithm design, and offers both CLI tools and an SDK for seamless integration.
-
-[TOC]
+SysCapBench is a comprehensive benchmarking framework for evaluating the performance of Large Language Models (LLMs) and AI systems across critical system capabilities. It features example benchmarks for system course exams, course projects, and cache algorithm design, and offers both CLI tools and an SDK for further development.
 
 ## Benchmark Overview
 ### Benchmark Concept
-A benchmark is a standard or point of reference against which things may be compared or assessed. In the context of AI and LLMs, benchmarks are essential for evaluating model capabilities, guiding development, and ensuring reliability. The following figure illustrates the main components of a AI benchmark. We abstract the benchmark into 4 components: the taskset, the environment, the executor, and the evaluator. This structure ensures a clear flow from tasks to metrics. See [benchmark_abstraction.md](doc/benchmark_abstract.md) for details.
+A benchmark is a standard or point of reference against which things may be compared or assessed. In the context of AI and LLMs, benchmarks are essential for evaluating model capabilities, guiding research directions, and measuring progress. The following figure illustrates the main components of a AI benchmark. We abstract the benchmark into 4 components: the taskset, the environment, the executor, and the evaluator. This abstraction ensures a clear flow from tasks to metrics. You can see [benchmark_abstraction.md](doc/benchmark_abstract.md) for details.
 
 <img src="doc/benchmark.png" alt="Dashboard Screenshot" width="600"/>
 
 ### Benchmarks
 
 SysCapBench currently includes the following benchmarks:
-- **Cache Benchmark** (`benchmarks/cache_bench/`) - Evaluates AI performance on cache system optimization and simulation tasks
-- **Course Exam Benchmark** (`benchmarks/course_exam_bench/`) - Tests LLM understanding of system engineering concepts through MIT course exams (54 questions across 4 exams)
-- **Course Project Benchmark** (`benchmarks/course_project_bench/`) - Assesses AI capability on practical system engineering lab projects
+- **Cache Benchmark** (`benchmarks/cache_bench/`) - Evaluates AI performance on cache algorithm design tasks
+- **Course Exam Benchmark** (`benchmarks/course_exam_bench/`) - Tests LLM understanding of system concepts through university course exams (54 questions across 4 exams)
+- **Course Project Benchmark** (`benchmarks/course_project_bench/`) - Assesses AI capability on practical system course projects
 - **Example Benchmark** (`benchmarks/example_bench/`) - Template and reference implementation for creating new benchmarks
 
 ## Quick Start
@@ -70,7 +68,7 @@ You can find more detailed usage guides in the CLI [README.md](cli/README.md).
 ## Adding Benchmarks
 
 > [!NOTE] 
-> We suggest getting starting by walking through the basic concept of a AI benchmark: [Benchmark Abstraction](benchmark_abstraction.md)
+> We suggest getting starting by walking through the basic concept of a AI benchmark: [Benchmark Abstraction](doc/benchmark_abstract.md).
 
 After understanding the basic concept, you can decide whether to add more tasks for existing benchmarks or create new benchmarks that map to different levels of system capabilities.
 
