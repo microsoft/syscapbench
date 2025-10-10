@@ -1,0 +1,72 @@
+Your task is to implement a cache replacement policy in Python. You can only reference the attributes provided below. You have read-only access to these attributes and no access to any functions.
+[Begin of accessible attributes]
+An "object" represents the unit of a request, such as inserting an object into the cache or retrieving an object from the cache. Each object `obj` provides the following **read-only** attributes that you can reference:
+- `obj.key` (str): A string that uniquely identifies the object.
+- `obj.size` (int): A positive integer representing the size of the object in bytes.
+
+You can also reference the following **read-only** attributes provided by a cache snapshots `cache_snapshot`:
+- `cache_snapshot.cache` (dict): A dictionary containing the cached objects, where the keys are the objects' keys, and the values are the corresponding objects themselves.
+- `cache_snapshot.size` (int): A non-negative integer representing the current total size of the cache in bytes.
+- `cache_snapshot.capacity` (int): A positive integer representing the maximum allowed size of the cache in bytes.
+- `cache_snapshot.access_count` (int): The current total number of cache accesses. You can also use this to represent current time.
+- `cache_snapshot.hit_count` (int): The current total number of cache hits.
+- `cache_snapshot.miss_count` (int): The current total number of cache misses.
+[End of accessible attributes]
+
+Implement your policy using the Python code framework below. Your implementation must strictly follow the comments in this Python code framework.
+[Begin of Python code framework]
+```python
+# Import anything you need below
+
+# Put tunable constant parameters below
+
+# Put the metadata specifically maintained by the policy below. 
+
+def evict(cache_snapshot, obj):
+    '''
+    This function defines how the policy chooses the eviction victim.
+    - Args:
+        - `cache_snapshot`: A snapshot of the current cache state.
+        - `obj`: The new object that needs to be inserted into the cache.
+    - Return:
+        - `candid_obj_key`: The key of the cached object that will be evicted to make room for `obj`.
+    '''
+    candid_obj_key = None
+    # Your code below
+    
+    return candid_obj_key
+
+def update_after_hit(cache_snapshot, obj):
+    '''
+    This function defines how the policy update the metadata it maintains immediately after a cache hit.
+    - Args:
+        - `cache_snapshot`: A snapshot of the current cache state.
+        - `obj`: The object accessed during the cache hit.
+    - Return: `None`
+    '''
+    # Your code below
+
+def update_after_insert(cache_snapshot, obj):
+    '''
+    This function defines how the policy updates the metadata it maintains immediately after inserting a new object into the cache.
+    - Args:
+        - `cache_snapshot`: A snapshot of the current cache state.
+        - `obj`: The object that was just inserted into the cache.
+    - Return: `None`
+    '''
+    # Your code below
+
+def update_after_evict(cache_snapshot, obj, evicted_obj):
+    '''
+    This function defines how the policy updates the metadata it maintains immediately after evicting the victim.
+    - Args:
+        - `cache_snapshot`: A snapshot of the current cache state.
+        - `obj`: The object to be inserted into the cache.
+        - `evicted_obj`: The object that was just evicted from the cache.
+    - Return: `None`
+    '''
+    # Your code below
+```
+[End of code framework]
+
+You **must not** alter the provided code framework. Also, keep the two comments "# Put tunable constant parameters below" and "# Put the metadata specifically maintained by the policy below" unchanged.

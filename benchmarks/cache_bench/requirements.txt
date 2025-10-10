@@ -1,0 +1,11 @@
+sentence-transformers==4.0.1
+scikit-learn==1.6.1
+requests
+azure-identity
+colorlog
+numpy
+matplotlib
+openbox
+logging-config
+tomli
+litellm==1.77.5

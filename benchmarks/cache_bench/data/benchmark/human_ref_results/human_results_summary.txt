@@ -1,0 +1,54 @@
+== arc ==
+arc | alibaba-storage -> avg mr_test: 0.7606
+arc | ra-fwe -> avg mr_test: 0.9963
+arc | ra-multikey -> avg mr_test: 0.9944
+arc | tencent-storage -> avg mr_test: 0.8028
+
+== clock ==
+clock | alibaba-storage -> avg mr_test: 0.7721
+clock | ra-fwe -> avg mr_test: 0.9992
+clock | ra-multikey -> avg mr_test: 0.9992
+clock | tencent-storage -> avg mr_test: 0.8274
+
+== fifo ==
+fifo | alibaba-storage -> avg mr_test: 0.8044
+fifo | ra-fwe -> avg mr_test: 0.9992
+fifo | ra-multikey -> avg mr_test: 0.9994
+fifo | tencent-storage -> avg mr_test: 0.8453
+
+== lfu ==
+lfu | alibaba-storage -> avg mr_test: 0.7644
+lfu | ra-fwe -> avg mr_test: 0.9969
+lfu | ra-multikey -> avg mr_test: 0.9945
+lfu | tencent-storage -> avg mr_test: 0.8095
+
+== lru ==
+lru | alibaba-storage -> avg mr_test: 0.7774
+lru | ra-fwe -> avg mr_test: 0.9992
+lru | ra-multikey -> avg mr_test: 0.9994
+lru | tencent-storage -> avg mr_test: 0.8297
+
+== s3fifo ==
+s3fifo | alibaba-storage -> avg mr_test: 0.7552
+s3fifo | ra-fwe -> avg mr_test: 0.7602
+s3fifo | ra-multikey -> avg mr_test: 0.6953
+s3fifo | tencent-storage -> avg mr_test: 0.7583
+
+== sieve ==
+sieve | alibaba-storage -> avg mr_test: 0.7644
+sieve | ra-fwe -> avg mr_test: 0.9969
+sieve | ra-multikey -> avg mr_test: 0.9945
+sieve | tencent-storage -> avg mr_test: 0.8116
+
+== slru ==
+slru | alibaba-storage -> avg mr_test: 0.7718
+slru | ra-fwe -> avg mr_test: 0.7781
+slru | ra-multikey -> avg mr_test: 0.7120
+slru | tencent-storage -> avg mr_test: 0.7617
+
+== tinyLFU ==
+tinyLFU | alibaba-storage -> avg mr_test: 0.7621
+tinyLFU | ra-fwe -> avg mr_test: 0.7362
+tinyLFU | ra-multikey -> avg mr_test: 0.6470
+tinyLFU | tencent-storage -> avg mr_test: 0.7666
+
