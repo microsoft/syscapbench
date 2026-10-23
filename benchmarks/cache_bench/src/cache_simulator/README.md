@@ -81,6 +81,10 @@ Your goal is to design a new cache replacement policy. We wish the policy to hav
 
 To write the code, follow the instruction in [code_design_prompt.txt](./code_design_prompt.txt). You can refer to [fifo.py](./cache/sample_code/fifo.py), [lru.py](./cache/sample_code/lru.py), [lfu.py](./cache/sample_code/lfu.py), [214.py](./cache/sample_code/214.py), and [214-pq.py]([fifo.py](./cache/sample_code/214-pq.py)) as examples.
 
+> **Note: Policy sandbox**
+>
+> Policies run in a separate, restricted Python process (see [policy_sandbox.py](./cache/policy_sandbox.py) and [Policy Sandbox](../../README.md#policy-sandbox)). A policy may only import `bisect`, `collections`, `functools`, `heapq`, `itertools`, `logging`, `math`, `operator`, `random`, `statistics`, `sys`, `time` and `typing` (some only partially), cannot access files or environment variables, and anything it prints goes to stderr. Code that does not follow these rules fails to simulate, and the reason is logged.
+
 1. [Design] Come up with a cache replacement policy.
 2. [Design] Implement the required functions following the instructions, and save the python code file under [cache/sample_code](./cache/sample_code/) using a brand-new file name.
 3. [Test] Add the absolute path of your code to `self_designed_algo_list` in line 61 of  [test.py](./test.py), and then run
@@ -154,7 +158,7 @@ twoq, slru, RandomLRU, tinyLFU, fifomerge, sfifo, sfifov0, lru-prob, s3lru, s3fi
 
 #### Timeout limit
 
-The cache simulator has a timeout limit set as 5 seconds. For our cases ([alpha1_m100_n1000](./cache/trace/zipf/alpha1_m100_n1000/)), 5s is enough to simulate a replacement policy on one trace. If it exceeds this limit, with high probability there is an infinite loop in the replacement policy. <span style="color: red;">However, as we use muliprocessing in [CrossValidator.py](./CrossValidator.py), we set the timeout_limit as 10.</span> If you want to change this limit, go to [Simulator.py](./Simulator.py) and change `SimulatorBase.timeout_limit` (line 58).
+The cache simulator has a timeout limit set as 5 seconds. For our cases ([alpha1_m100_n1000](./cache/trace/zipf/alpha1_m100_n1000/)), 5s is enough to simulate a replacement policy on one trace. If it exceeds this limit, with high probability there is an infinite loop in the replacement policy. <span style="color: red;">However, as we use muliprocessing in [CrossValidator.py](./CrossValidator.py), we set the timeout_limit as 10.</span> If you want to change this limit, go to [Simulator.py](./Simulator.py) and change `SimulatorBase.timeout_limit` (line 58). The limit applies to the sandboxed process that runs the policy, which is killed when the limit is exceeded.
 
 #### Tune runs
 

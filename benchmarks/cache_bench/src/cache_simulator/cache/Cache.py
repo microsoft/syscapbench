@@ -1,13 +1,4 @@
 import os
-import sys
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-import random
-
-random.seed(42)  # set the random seed before importing `My` to enable reproduction
-import importlib
-
-import My
 
 
 class CacheObj:
@@ -64,18 +55,21 @@ class CacheConfig:
 
 
 class Cache:
-    def __init__(self, config: CacheConfig):
+    def __init__(self, config: CacheConfig, policy):
+        """`policy` provides `evict`, `update_after_hit`, `update_after_insert` and `update_after_evict`.
+
+        Untrusted policies must only be loaded in the sandbox (see `policy_sandbox.py`), never imported here.
+        """
         assert isinstance(config, CacheConfig)
 
         self.__capacity = config.capacity
         self.__cache = dict()  # a map from key to cache_obj
         self.__naccess = 0
         self.__nhit = 0
-        importlib.reload(My)
-        self.update_after_insert_func = My.update_after_insert
-        self.update_after_evict_func = My.update_after_evict
-        self.update_after_hit_func = My.update_after_hit
-        self.evict_func = My.evict
+        self.update_after_insert_func = policy.update_after_insert
+        self.update_after_evict_func = policy.update_after_evict
+        self.update_after_hit_func = policy.update_after_hit
+        self.evict_func = policy.evict
 
     @property
     def cache(self):  # read-only

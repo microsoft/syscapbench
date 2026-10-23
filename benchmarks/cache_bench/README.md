@@ -27,6 +27,26 @@ Models are tasked with implementing a cache replacement policy that determines w
   - **Iterative Refinement**: Models undergo 3 rounds of feedback and refinement
   - Performance is measured against various workload patterns representing real-world scenarios
 
+### Policy Sandbox
+
+Policies written by models are untrusted code. The simulator never imports or runs them in the evaluator process, which
+holds the API keys from `env.toml`. Instead, [`policy_sandbox.py`](src/cache_simulator/cache/policy_sandbox.py):
+
+1. Checks the code against an allow-list before running it. A policy may only import `bisect`, `collections`,
+   `functools`, `heapq`, `itertools`, `logging`, `math`, `operator`, `random`, `statistics`, `sys`, `time` and
+   `typing` (some of them only partially, e.g., `sys.maxsize`). Other imports (e.g., `numpy`, `copy`, `dataclasses`
+   or `os`), access to dunder and name-mangled private attributes (except `__init__` and `__name__`), and builtins such
+   as `open`, `eval`, `exec`, `type` and `setattr` are rejected.
+2. Runs each simulation in a fresh Python process with an empty environment, restricted builtins and resource limits
+   that forbid opening files or sockets and starting processes, and that bound CPU time.
+
+A policy that is rejected, raises an exception or times out gets no miss ratio (`None`), and the reason is logged.
+Anything a policy prints or logs goes to stderr, and `random` is seeded with 42 before every simulation.
+
+The sandbox is defense in depth rather than a complete security boundary: for example, the process limit does not apply
+to root, and memory is not limited by default. Run evaluations of untrusted models in Docker (see below) or another
+disposable environment.
+
 ## Benchmark Setup
 
 ### Prerequisites

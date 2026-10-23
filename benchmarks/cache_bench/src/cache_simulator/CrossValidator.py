@@ -10,15 +10,14 @@ from Simulator import SimulatorCache, SimulatorConfig
 from utils import miss_ratio_reduction, run_libcachesim, write_to_file
 
 
-def cross_validate_simulate(simulator: SimulatorCache):
+def cross_validate_simulate(simulator: SimulatorCache, code: str):
     return simulator.simulate(
-        code='',
+        code=code,
         code_id='cross_validate',
         need_log=False,
         check_code_exists=False,
         fix_default_param=False,
         need_save=False,
-        need_copy_code=False,
         default_params=None,
     )
 
@@ -263,14 +262,11 @@ class CrossValidator:
 
         # is_sota = False
         example_sim = simulator_list[0]
-        copy_dst = os.path.join(example_sim.system_path, 'My.py')
         with open(algo) as file:
             raw_code = file.read()
-        assert os.path.exists(copy_dst)
-        with open(copy_dst, 'w') as file:
-            file.write(example_sim._fix_default_param_for_code(raw_code, params))
+        code = example_sim._fix_default_param_for_code(raw_code, params)
         with Pool(len(simulator_list) * 2) as p:
-            mr_list = p.map(cross_validate_simulate, simulator_list)
+            mr_list = p.starmap(cross_validate_simulate, [(sim, code) for sim in simulator_list])
         assert len(mr_list) == len(simulator_list)
         for mr, sim in zip(mr_list, simulator_list):
             new_cross_validator_entry = CrossValidatorEntry(

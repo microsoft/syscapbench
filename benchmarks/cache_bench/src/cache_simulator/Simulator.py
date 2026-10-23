@@ -6,7 +6,8 @@ import traceback
 from abc import ABC, abstractmethod
 from datetime import datetime
 
-from cache_simulator.cache import Cache, CacheConfig, CacheObj, Trace
+from cache_simulator.cache import CacheConfig, CacheObj, Trace
+from cache_simulator.cache.policy_sandbox import run_policy_simulation
 from cache_simulator.utils import extract_string, get_type_and_value, is_expr, modify_string, write_to_file
 
 # from openbox import Optimizer
@@ -137,18 +138,11 @@ class SimulatorCache(SimulatorBase):
             return [CacheObj(key=str(entry.key), size=1, consider_obj_size=False) for entry in trace.entries]
 
     @timeout()
-    def _run(self, code, need_copy_code: bool = True):
-        if need_copy_code == True:
-            with open(os.path.join(self.system_path, 'My.py'), 'w') as file:
-                file.write(code)
-
-        cache = Cache(config=self.config)
-        trace = self._read_trace()
-        assert cache.access_count == 0
-        assert cache.hit_count == 0
-        for oid, obj in enumerate(trace):
-            cache.get(obj)
-        return round(1 - cache.hit_count / cache.access_count, 4)
+    def _run(self, code):
+        # The policy is untrusted (LLM-generated): never import it here, run it in the sandbox instead.
+        return run_policy_simulation(
+            code=code, config=self.config, trace=self._read_trace(), timeout=self.timeout_limit
+        )
 
     def _fix_default_param_for_code(self, code, default_params: dict = None):
         config_space = self._get_configspace(code, True)
@@ -171,7 +165,6 @@ class SimulatorCache(SimulatorBase):
         check_code_exists: bool = True,
         fix_default_param: bool = False,
         need_save=True,
-        need_copy_code: bool = True,
         default_params: dict = None,
     ):
         self.code_path = os.path.join(self.code_folder, f'{code_id}.py')
@@ -181,14 +174,13 @@ class SimulatorCache(SimulatorBase):
             code = self._fix_default_param_for_code(code, default_params)
         start = time.time()
         try:
-            miss_ratio = self._run(code, need_copy_code)
+            miss_ratio = self._run(code)
         except Exception as error:
             end = time.time()
             self.latency += end - start
             logging.warning(f'New code: {code_id}\n\tFAIL...\n\tError message: {error!r}')
             if need_log:
                 self._log_error(code_id, '(Simulation) ' + repr(error), traceback.format_exc().strip())
-            self._reset(need_copy_code)
             return None
         end = time.time()
         self.latency += end - start
@@ -198,7 +190,7 @@ class SimulatorCache(SimulatorBase):
             write_to_file(dest_path=self.code_path, contents=code.strip(), is_append=False, is_json=False)
         return miss_ratio
 
-    def tune(self, code, code_id, fixed_default_param: bool, need_log: bool = True, need_copy_code: bool = True):
+    def tune(self, code, code_id, fixed_default_param: bool, need_log: bool = True):
         self.code_path = os.path.join(self.code_folder, f'{code_id}.py')
         config_space = self._get_configspace(code, fixed_default_param)
         if config_space == None:
@@ -215,9 +207,8 @@ class SimulatorCache(SimulatorBase):
             assert len(params) > 0
             new_code = self._update_code(code, params)
             try:
-                score = self._run(code=new_code, need_copy_code=need_copy_code)
+                score = self._run(code=new_code)
             except Exception:
-                self._reset(need_copy_code)
                 score = 1.0
             assert score != None
             return dict(objectives=[score])  # tune for the minimal
@@ -244,7 +235,6 @@ class SimulatorCache(SimulatorBase):
             logging.info(f'Tuning code {code_id}: FAIL...\n\tError message: {error!r}')
             if need_log:
                 self._log_error(code_id, '(Tuning) ' + repr(error), traceback.format_exc().strip())
-            self._reset(need_copy_code)
         end = time.time()
         self.latency += end - start
 
@@ -372,12 +362,6 @@ class SimulatorCache(SimulatorBase):
         new_tunable_parameters = '\n'.join(new_cexprs)
         new_code = modify_string(text=code, regex=tp_pattern, group_id=2, modification=new_tunable_parameters)
         return new_code
-
-    def _reset(self, need_copy_code: bool = True):
-        if need_copy_code == True:
-            with open(os.path.join(self.system_path, 'My.py'), 'w') as file:
-                file.write('')
-        # self.code_path = None
 
     def _log_error(self, error_code_id, error_msg, traceback_msg=''):
         assert self.code_path != None

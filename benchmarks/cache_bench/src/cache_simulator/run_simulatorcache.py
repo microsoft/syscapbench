@@ -54,7 +54,6 @@ def simulate(policy_code=None, trace_path=None):
         check_code_exists=False,
         fix_default_param=False,
         need_save=False,
-        need_copy_code=True,
         default_params=None,
     )
     e = time.time()
@@ -104,7 +103,6 @@ def tune():
             code_id='any-id-you-like',
             need_log=False,
             fixed_default_param=False,
-            need_copy_code=True,
         )
         e = time.time()
         if mr_info != None:
