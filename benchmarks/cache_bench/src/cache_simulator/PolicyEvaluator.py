@@ -212,7 +212,6 @@ class PolicyEvaluator:
             check_code_exists=False,
             fix_default_param=True,
             need_save=False,
-            need_copy_code=True,
             default_params=params,
         )
 

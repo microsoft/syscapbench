@@ -9,15 +9,14 @@ from Simulator import SimulatorCache, SimulatorConfig
 from utils import run_libcachesim, tune_libcachesim
 
 
-def signatary_simulate(simulator: SimulatorCache):
+def signatary_simulate(simulator: SimulatorCache, code: str):
     return simulator.simulate(
-        code='',
+        code=code,
         code_id='signature',
         need_log=False,
         check_code_exists=False,
         fix_default_param=False,
         need_save=False,
-        need_copy_code=False,
     )
 
 
@@ -115,14 +114,11 @@ class Signatary:
 
         # is_sota = False
         example_sim = self.test_simulator_list[0]
-        copy_dest = os.path.join(example_sim.system_path, 'My.py')
-        assert os.path.exists(copy_dest)
-        with open(copy_dest, 'w') as file:
-            file.write(example_sim._fix_default_param_for_code(code))
+        fixed_code = example_sim._fix_default_param_for_code(code)
         signature = []
         start = time.time()
         with Pool(len(self.test_simulator_list) * 2) as p:
-            signature = p.map(signatary_simulate, self.test_simulator_list)
+            signature = p.starmap(signatary_simulate, [(sim, fixed_code) for sim in self.test_simulator_list])
         end = time.time()
         self.latency += end - start
         return self._normalize_signature(signature)
